@@ -23,8 +23,9 @@ int partition(int *array, int start, int end, size_t size)
 			tmp = array[i];
 			array[i] = array[partitionIndex];
 			array[partitionIndex] = tmp;
-			partitionIndex++;
 			print_array(array, size);
+
+			return (partitionIndex);
 		}
 	}
 

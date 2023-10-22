@@ -5,10 +5,11 @@
  * @array: The array to be partitioned.
  * @start: First element in @array
  * @end: Last element in @array
+ * @size: Number of elements in @array
  *
  * Return: The index where the array will be partitioned.
  */
-int partition(int *array, int start, int end)
+int partition(int *array, int start, int end, size_t size)
 {
 	int pivot, partitionIndex, i, tmp;
 
@@ -30,7 +31,7 @@ int partition(int *array, int start, int end)
 	array[partitionIndex] = array[end];
 	array[end] = tmp;
 
-	print_array(array, sizeof(array) + 2);
+	print_array(array, size);
 
 	return (partitionIndex);
 }
@@ -41,18 +42,19 @@ int partition(int *array, int start, int end)
  * @array: The array to be sorted
  * @start: First element in @array
  * @end: Last element in @array
+ * @size: Number of elements in @array
  *
  * Return: void.
  */
-void _qsort(int *array, int start, int end)
+void _qsort(int *array, int start, int end, size_t size)
 {
 	int partitionIndex;
 
 	if (start < end)
 	{
-		partitionIndex = partition(array, start, end);
-		_qsort(array, start, partitionIndex - 1);
-		_qsort(array, partitionIndex + 1, end);
+		partitionIndex = partition(array, start, end, size);
+		_qsort(array, start, partitionIndex - 1, size);
+		_qsort(array, partitionIndex + 1, end, size);
 	}
 }
 
@@ -66,5 +68,8 @@ void _qsort(int *array, int start, int end)
  */
 void quick_sort(int *array, size_t size)
 {
-	_qsort(array, 0, size - 1);
+	if (!array || size < 2)
+		return;
+
+	_qsort(array, 0, size - 1, size);
 }

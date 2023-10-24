@@ -23,9 +23,8 @@ int partition(int *array, int start, int end, size_t size)
 			tmp = array[i];
 			array[i] = array[partitionIndex];
 			array[partitionIndex] = tmp;
+			partitionIndex++;
 			print_array(array, size);
-
-			return (partitionIndex);
 		}
 	}
 
@@ -70,7 +69,7 @@ void _qsort(int *array, int start, int end, size_t size)
  */
 void quick_sort(int *array, size_t size)
 {
-	if (!array || size < 2)
+	if (!array || !size)
 		return;
 
 	_qsort(array, 0, size - 1, size);
